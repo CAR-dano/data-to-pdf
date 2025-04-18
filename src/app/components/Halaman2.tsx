@@ -1,7 +1,6 @@
 import React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
-import Penilaian from "./PenilaianHasil";
 import PenilaianContoh from "./PenilaianContoh";
 
 function Halaman2() {
