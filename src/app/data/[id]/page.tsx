@@ -177,6 +177,8 @@ function DataPage() {
       (photo: any) => photo.category === "Eksterior Tambahan"
     );
 
+    console.log("Exterior Photos:", exteriorWajibPhotos);
+
     exteriorWajibPhotos?.sort((a: any, b: any) => {
       const indexA = SortingExteriorData.indexOf(a.label);
       const indexB = SortingExteriorData.indexOf(b.label);
