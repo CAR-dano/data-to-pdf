@@ -25,7 +25,7 @@ export const SortingExteriorData = [
   "Karet bagasi",
   "Baut bagasi",
   "Kolong bagasi",
-  "Asap kendaraan (jika ngobos)",
+  "Asap Kendaraan Jika Ngobos",
   "Bumper",
   "Fender",
   "Handle pintu",
