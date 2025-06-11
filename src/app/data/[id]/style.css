@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: poppins, sans-serif;
 }
 .sheet-outer {
   margin: 0;
@@ -39,6 +40,10 @@ body {
   .sheet-outer.A4,
   .sheet-outer.A5.landscape {
     width: 210mm;
+  }
+
+  .no-print {
+    display: none !important;
   }
 
   body {
