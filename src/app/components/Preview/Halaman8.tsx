@@ -23,7 +23,7 @@ const Halaman8: React.FC<Halaman8Props> = ({
       <div className="w-full border-2 border-black mt-12 mb-8">
         <div className="w-full flex">
           <div className="w-full bg-[#E95F37]">
-            <p className="text-black text-left text-white py-3 px-3 font-semibold border-b-2 border-black">
+            <p className="text-left text-white py-3 px-3 font-semibold border-b-2 border-black">
               Hasil Pengecekan Ketebalan Cat
             </p>
           </div>
@@ -145,9 +145,9 @@ const Halaman8: React.FC<Halaman8Props> = ({
               onClick({
                 label: `Ketebalan Sideskirt Kiri`,
                 fieldName: `bodyPaintThickness`,
-                oldValue: data?.bodyPaintThickness.left.sideskirt,
+                oldValue: data?.bodyPaintThickness.left.sideSkirt,
                 subFieldName: "left",
-                subsubFieldName: "sideskirt",
+                subsubFieldName: "sideSkirt",
                 type: "normal-input",
                 onClose: () => {},
               })
@@ -162,10 +162,10 @@ const Halaman8: React.FC<Halaman8Props> = ({
                   : "cursor-default"
               }`}
             >
-              {data.bodyPaintThickness.left.sideskirt}mm
+              {data.bodyPaintThickness.left.sideSkirt}mm
             </div>
           </div>
-          <p className="text-black font-bold mt-10">SAMPING KIRI</p>
+          <p className="font-bold mt-10">SAMPING KIRI</p>
         </div>
 
         <div className="relative w-full mt-16 mb-10  flex justify-center flex-col items-center">
@@ -214,7 +214,7 @@ const Halaman8: React.FC<Halaman8Props> = ({
               })
             }
             className="absolute transform -translate-x-1/2"
-            style={{ top: "-12%", left: "39%" }}
+            style={{ top: "-10%", left: "35%" }}
           >
             <div
               className={`text-black ${
@@ -240,7 +240,7 @@ const Halaman8: React.FC<Halaman8Props> = ({
               })
             }
             className="absolute transform -translate-x-1/2"
-            style={{ top: "-12%", right: "33%" }}
+            style={{ top: "-10%", right: "33%" }}
           >
             <div
               className={`text-black ${
@@ -266,7 +266,7 @@ const Halaman8: React.FC<Halaman8Props> = ({
               })
             }
             className="absolute transform -translate-x-1/2"
-            style={{ top: "0%", right: "12%" }}
+            style={{ top: "-10%", right: "12%" }}
           >
             <div
               className={`text-black ${
@@ -284,15 +284,15 @@ const Halaman8: React.FC<Halaman8Props> = ({
               onClick({
                 label: `Ketebalan Sideskirt Kanan`,
                 fieldName: `bodyPaintThickness`,
-                oldValue: data?.bodyPaintThickness.right.sideskirt,
+                oldValue: data?.bodyPaintThickness.right.sideSkirt,
                 subFieldName: "right",
-                subsubFieldName: "sideskirt",
+                subsubFieldName: "sideSkirt",
                 type: "normal-input",
                 onClose: () => {},
               })
             }
             className="absolute transform -translate-x-1/2"
-            style={{ top: "77%", right: "38%" }}
+            style={{ top: "79%", right: "40%" }}
           >
             <div
               className={`text-black ${
@@ -301,10 +301,10 @@ const Halaman8: React.FC<Halaman8Props> = ({
                   : "cursor-default"
               }`}
             >
-              {data.bodyPaintThickness.right.sideskirt}mm
+              {data.bodyPaintThickness.right.sideSkirt}mm
             </div>
           </div>
-          <p className="text-black font-bold mt-10">SAMPING KANAN</p>
+          <p className="font-bold mt-10">SAMPING KANAN</p>
         </div>
       </div>
 

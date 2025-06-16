@@ -29,7 +29,7 @@ const HalamanFotoDokumen: React.FC<HalamanFotoDokumenProps> = ({
   return (
     <div className="text-black px-[30px] font-poppins">
       <Header />
-      <div className="w-full border-2 border-black mt-12 mb-8 min-h-[830px]">
+      <div className="w-full border-2 border-black mt-5 mb-5 min-h-[830px]">
         <div className="w-full flex">
           <div className="w-full bg-[#E95F37]">
             <p className="text-left text-white py-3 px-3 font-semibold border-b-2 border-black">
@@ -38,7 +38,7 @@ const HalamanFotoDokumen: React.FC<HalamanFotoDokumenProps> = ({
           </div>
         </div>
 
-        <div className="flex flex-col justify-center items-center h-full py-10 gap-10">
+        <div className="flex flex-wrap gap-1 gap-y-5 px-1 py-5 justify-around">
           {data.photos.slice(0, 2).map((item: any, index: any) => (
             <PhotoItemGeneral
               key={index}

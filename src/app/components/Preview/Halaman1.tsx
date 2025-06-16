@@ -426,22 +426,22 @@ const Halaman1: React.FC<Halaman1Props> = ({
             />
           </div>
           <div
+            onClick={() =>
+              editable &&
+              onClick({
+                label: `Inspection Summary`,
+                fieldName: `inspectionSummary`,
+                oldValue: data.inspectionSummary.deskripsiKeseluruhan,
+                subFieldName: "deskripsiKeseluruhan",
+                type: "penilaian-array",
+                onClose: () => {},
+              })
+            }
             className={`w-1/2 ${
               editable ? "cursor-pointer group hover:bg-[#F4622F] " : ""
             }`}
           >
             <div
-              onClick={() =>
-                editable &&
-                onClick({
-                  label: `Inspection Summary`,
-                  fieldName: `inspectionSummary`,
-                  oldValue: data.inspectionSummary.deskripsiKeseluruhan,
-                  subFieldName: "deskripsiKeseluruhan",
-                  type: "penilaian-array",
-                  onClose: () => {},
-                })
-              }
               className={`text-[12px] text-left 
                 ${editable ? "group-hover:text-white" : ""}
                 text-black py-2 px-2 font-bold `}
@@ -537,6 +537,11 @@ const Halaman1: React.FC<Halaman1Props> = ({
             </p>
           </div>
           <div className="w-1/2 flex">
+            <div>
+              <div className="w-25 h-10"></div>
+              <div className="w-25 h-10"></div>
+              <div className="w-25 h-10"></div>
+            </div>
             <div className="flex flex-col justify-start text-[24px] font-bold text-left my-2 gap-3 mx-5 ">
               {data.inspectionSummary.indikasiTabrakan ? (
                 <div

@@ -283,7 +283,7 @@ const Halaman2: React.FC<Halaman2Props> = ({
             </div>
           </div>
           <div className="w-[20%] h-50 flex justify-center items-center">
-            <p className="text-center text-[10px] text-black px-3 font-light -mt-10">
+            <p className="text-center font-semibold text-[10px] text-black px-3 font-light -mt-10">
               *Biaya estimasi dapat lebih murah atau mahal tergantung bengkel
             </p>
           </div>
