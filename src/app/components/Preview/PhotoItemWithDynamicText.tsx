@@ -28,9 +28,6 @@ const PhotoItemWithDynamicText: React.FC<PhotoItemWithDynamicTextProps> = ({
         alt={capitalizedLabel}
         className="w-[220px] h-[165px] object-cover "
       />
-      <p className="w-[220px] h-[48px] overflow-hidden text-center font-semibold mt-2 text-base break-words">
-        {capitalizedLabel}
-      </p>
     </div>
   );
 };

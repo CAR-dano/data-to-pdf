@@ -29,7 +29,7 @@ const HalamanFotoDokumen: React.FC<HalamanFotoDokumenProps> = ({
   return (
     <div className="text-black px-[30px] font-poppins">
       <Header />
-      <div className="w-full border-2 border-black mt-5 mb-5 min-h-[830px]">
+      <div className="w-full border-2 border-black mt-5 mb-5 min-h-[870px]">
         <div className="w-full flex">
           <div className="w-full bg-[#E95F37]">
             <p className="text-left text-white py-3 px-3 font-semibold border-b-2 border-black">

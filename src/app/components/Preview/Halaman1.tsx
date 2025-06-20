@@ -537,11 +537,6 @@ const Halaman1: React.FC<Halaman1Props> = ({
             </p>
           </div>
           <div className="w-1/2 flex">
-            <div>
-              <div className="w-25 h-10"></div>
-              <div className="w-25 h-10"></div>
-              <div className="w-25 h-10"></div>
-            </div>
             <div className="flex flex-col justify-start text-[24px] font-bold text-left my-2 gap-3 mx-5 ">
               {data.inspectionSummary.indikasiTabrakan ? (
                 <div
