@@ -21,6 +21,7 @@ const HalamanGlosarium = () => {
         width={800}
         height={600}
         objectFit="contain"
+        loading="eager"
       />
     </div>
   );
