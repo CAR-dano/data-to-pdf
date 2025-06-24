@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import PenilaianContoh from "./PenilaianContoh";
@@ -14,6 +14,51 @@ const Halaman2: React.FC<Halaman2Props> = ({
   editable,
   onClick = () => {},
 }) => {
+  const mesinNotesRef = useRef<HTMLDivElement>(null);
+  const kakiKakiNotesRef = useRef<HTMLDivElement>(null);
+  const interiorNotesRef = useRef<HTMLDivElement>(null);
+  const eksteriorNotesRef = useRef<HTMLDivElement>(null);
+  const estimasiPartRef = useRef<HTMLDivElement>(null);
+  const estimasiHargaRef = useRef<HTMLDivElement>(null);
+
+  const [mesinNotesFontSize, setMesinNotesFontSize] = useState(13);
+  const [kakiKakiNotesFontSize, setKakiKakiNotesFontSize] = useState(13);
+  const [interiorNotesFontSize, setInteriorNotesFontSize] = useState(13);
+  const [eksteriorNotesFontSize, setEksteriorNotesFontSize] = useState(13);
+  const [estimasiPartFontSize, setEstimasiPartFontSize] = useState(13);
+  const [estimasiHargaFontSize, setEstimasiHargaFontSize] = useState(13);
+
+  useEffect(() => {
+    const adjustFontSize = (
+      ref: React.RefObject<HTMLDivElement | null>,
+      setFontSize: React.Dispatch<React.SetStateAction<number>>,
+      maxHeight: number = 180
+    ) => {
+      if (ref.current) {
+        let currentFontSize = 13;
+
+        // Reset font size
+        ref.current.style.fontSize = `${currentFontSize}px`;
+
+        // Kurangi font size jika tinggi melebihi maxHeight
+        while (ref.current.scrollHeight > maxHeight && currentFontSize > 8) {
+          currentFontSize -= 0.5;
+          ref.current.style.fontSize = `${currentFontSize}px`;
+        }
+
+        setFontSize(currentFontSize);
+      }
+    };
+
+    // Adjust font sizes for all sections
+    adjustFontSize(mesinNotesRef, setMesinNotesFontSize, 180);
+    adjustFontSize(kakiKakiNotesRef, setKakiKakiNotesFontSize, 180);
+    adjustFontSize(interiorNotesRef, setInteriorNotesFontSize, 180);
+    adjustFontSize(eksteriorNotesRef, setEksteriorNotesFontSize, 180);
+    adjustFontSize(estimasiPartRef, setEstimasiPartFontSize, 200);
+    adjustFontSize(estimasiHargaRef, setEstimasiHargaFontSize, 200);
+  }, [data]);
+
   if (data == undefined || data == null) {
     return <div>Loading...</div>; // atau bisa return null
   }
@@ -71,25 +116,29 @@ const Halaman2: React.FC<Halaman2Props> = ({
 
         <div className="w-full flex border-b-2 border-black">
           <div
-            className={`w-1/4 min-h-[180px] border-black border-r-2 ${
+            onClick={() =>
+              editable &&
+              onClick({
+                label: `Inspection Summary`,
+                fieldName: `inspectionSummary`,
+                oldValue: data.inspectionSummary.mesinNotes,
+                subFieldName: "mesinNotes",
+                type: "penilaian-array",
+                onClose: () => {},
+              })
+            }
+            className={`w-1/4 mn-h-[180px] border-black border-r-2 ${
               editable
                 ? "cursor-pointer hover:bg-[#F4622F] hover:text-white"
                 : ""
             }`}
           >
             <div
-              onClick={() =>
-                editable &&
-                onClick({
-                  label: `Inspection Summary`,
-                  fieldName: `inspectionSummary`,
-                  oldValue: data.inspectionSummary.mesinNotes,
-                  subFieldName: "mesinNotes",
-                  type: "penilaian-array",
-                  onClose: () => {},
-                })
-              }
-              className="text-left text-[13px] text-black py-2 px-3 font-medium "
+              ref={mesinNotesRef}
+              className={`text-left text-black py-2 px-3 font-medium overflow-hidden ${
+                editable ? "hover:text-white" : ""
+              }`}
+              style={{ fontSize: `${mesinNotesFontSize}px` }}
             >
               <ol className="list-disc list-inside">
                 {data.inspectionSummary.mesinNotes.map(
@@ -103,6 +152,17 @@ const Halaman2: React.FC<Halaman2Props> = ({
             </div>
           </div>
           <div
+            onClick={() =>
+              editable &&
+              onClick({
+                label: `Inspection Summary`,
+                fieldName: `inspectionSummary`,
+                oldValue: data.inspectionSummary.kakiKakiNotes,
+                subFieldName: "kakiKakiNotes",
+                type: "penilaian-array",
+                onClose: () => {},
+              })
+            }
             className={`w-1/4 min-h-[180px] border-black border-r-2 ${
               editable
                 ? "cursor-pointer hover:bg-[#F4622F] hover:text-white"
@@ -110,18 +170,11 @@ const Halaman2: React.FC<Halaman2Props> = ({
             }`}
           >
             <div
-              onClick={() =>
-                editable &&
-                onClick({
-                  label: `Inspection Summary`,
-                  fieldName: `inspectionSummary`,
-                  oldValue: data.inspectionSummary.kakiKakiNotes,
-                  subFieldName: "kakiKakiNotes",
-                  type: "penilaian-array",
-                  onClose: () => {},
-                })
-              }
-              className="text-left text-[13px] text-black py-2 px-3 font-medium"
+              ref={kakiKakiNotesRef}
+              className={`text-left text-black py-2 px-3 font-medium overflow-hidden ${
+                editable ? "hover:text-white" : ""
+              }`}
+              style={{ fontSize: `${kakiKakiNotesFontSize}px` }}
             >
               <ol className="list-disc list-inside">
                 {data.inspectionSummary.kakiKakiNotes.map(
@@ -135,6 +188,17 @@ const Halaman2: React.FC<Halaman2Props> = ({
             </div>
           </div>
           <div
+            onClick={() =>
+              editable &&
+              onClick({
+                label: `Inspection Summary`,
+                fieldName: `inspectionSummary`,
+                oldValue: data.inspectionSummary.interiorNotes,
+                subFieldName: "interiorNotes",
+                type: "penilaian-array",
+                onClose: () => {},
+              })
+            }
             className={`w-1/4 min-h-[180px] border-black border-r-2 ${
               editable
                 ? "cursor-pointer hover:bg-[#F4622F] hover:text-white"
@@ -142,18 +206,11 @@ const Halaman2: React.FC<Halaman2Props> = ({
             }`}
           >
             <div
-              onClick={() =>
-                editable &&
-                onClick({
-                  label: `Inspection Summary`,
-                  fieldName: `inspectionSummary`,
-                  oldValue: data.inspectionSummary.interiorNotes,
-                  subFieldName: "interiorNotes",
-                  type: "penilaian-array",
-                  onClose: () => {},
-                })
-              }
-              className="text-left text-[13px] text-black py-2 px-3 font-medium"
+              ref={interiorNotesRef}
+              className={`text-left text-black py-2 px-3 font-medium overflow-hidden ${
+                editable ? "hover:text-white" : ""
+              }`}
+              style={{ fontSize: `${interiorNotesFontSize}px` }}
             >
               <ol className="list-disc list-inside">
                 {data.inspectionSummary.interiorNotes.map(
@@ -167,6 +224,17 @@ const Halaman2: React.FC<Halaman2Props> = ({
             </div>
           </div>
           <div
+            onClick={() =>
+              editable &&
+              onClick({
+                label: `Inspection Summary`,
+                fieldName: `inspectionSummary`,
+                oldValue: data.inspectionSummary.eksteriorNotes,
+                subFieldName: "eksteriorNotes",
+                type: "penilaian-array",
+                onClose: () => {},
+              })
+            }
             className={`w-1/4 min-h-[180px] ${
               editable
                 ? "cursor-pointer hover:bg-[#F4622F] hover:text-white"
@@ -174,18 +242,11 @@ const Halaman2: React.FC<Halaman2Props> = ({
             }`}
           >
             <div
-              onClick={() =>
-                editable &&
-                onClick({
-                  label: `Inspection Summary`,
-                  fieldName: `inspectionSummary`,
-                  oldValue: data.inspectionSummary.eksteriorNotes,
-                  subFieldName: "eksteriorNotes",
-                  type: "penilaian-array",
-                  onClose: () => {},
-                })
-              }
-              className="text-left text-[13px] text-black py-2 px-3 font-medium"
+              ref={eksteriorNotesRef}
+              className={`text-left text-black py-2 px-3 font-medium overflow-hidden ${
+                editable ? "hover:text-white" : ""
+              }`}
+              style={{ fontSize: `${eksteriorNotesFontSize}px` }}
             >
               {data.inspectionSummary.eksteriorNotes ? (
                 <ol className="list-disc list-inside">
@@ -250,16 +311,20 @@ const Halaman2: React.FC<Halaman2Props> = ({
             `}
           >
             <div
-              className={`text-left text-[13px] py-2 px-3 font-medium list-none ${
+              ref={estimasiPartRef}
+              className={`text-left py-2 px-3 font-medium list-none overflow-hidden ${
                 editable ? "group-hover:text-white" : ""
               }`}
+              style={{ fontSize: `${estimasiPartFontSize}px` }}
             >
               <ul className="list-none">
-                {data.inspectionSummary.estimasiPerbaikan.map((item: any) => (
-                  <li key={item.namaPart} className="text-black font-semibold">
-                    {capitalizeFirstLetterOfSentences(item.namaPart)}
-                  </li>
-                ))}
+                {data.inspectionSummary.estimasiPerbaikan.map(
+                  (item: any, index: any) => (
+                    <li key={index} className="text-black font-semibold">
+                      {capitalizeFirstLetterOfSentences(item.namaPart)}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>
@@ -269,16 +334,20 @@ const Halaman2: React.FC<Halaman2Props> = ({
             }`}
           >
             <div
-              className={`text-left text-[13px] py-2 px-3 font-medium list-none ${
+              ref={estimasiHargaRef}
+              className={`text-left py-2 px-3 font-medium list-none overflow-hidden ${
                 editable ? "group-hover:text-white" : ""
               }`}
+              style={{ fontSize: `${estimasiHargaFontSize}px` }}
             >
               <ul className="list-none">
-                {data.inspectionSummary.estimasiPerbaikan.map((item: any) => (
-                  <li key={item.harga} className="text-black font-semibold">
-                    {formatPrice(item.harga)}
-                  </li>
-                ))}
+                {data.inspectionSummary.estimasiPerbaikan.map(
+                  (item: any, index: any) => (
+                    <li key={index} className="text-black font-semibold">
+                      {formatPrice(item.harga)}
+                    </li>
+                  )
+                )}
               </ul>
             </div>
           </div>
@@ -355,6 +424,7 @@ const Halaman2: React.FC<Halaman2Props> = ({
               {/* Baris Huruf */}
               <div className="flex border-t-2 border-black">
                 {[
+                  "",
                   "E",
                   "D-",
                   "D",
@@ -363,7 +433,6 @@ const Halaman2: React.FC<Halaman2Props> = ({
                   "B-",
                   "B",
                   "B+",
-                  "A-",
                   "A-",
                   "A",
                 ].map((grade, i) => (
