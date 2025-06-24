@@ -16,6 +16,7 @@ const HalamanGlosarium = () => {
     >
       <Image
         src="/assets/glosarium.svg"
+        id="glosarium"
         alt="Glosarium"
         width={800}
         height={600}
