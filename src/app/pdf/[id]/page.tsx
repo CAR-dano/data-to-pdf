@@ -66,7 +66,7 @@ function DataPage() {
   const getData = async (id: string) => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_PDF_URL}/${process.env.NEXT_PUBLIC_CODE}/inspections/${id}`,
+        `${process.env.NEXT_PUBLIC_PDF_URL}/${process.env.NEXT_PUBLIC_CODE}/inspections/${id}/no-docs`,
         {
           headers: {
             "Content-Type": "application/json",
