@@ -18,7 +18,7 @@ const HalamanKakiKaki: React.FC<HalamanKakiKakiProps> = ({
     return <div>Loading...</div>; // atau bisa return null
   }
 
-  const PHOTO_URL = process.env.NEXT_PUBLIC_PDF_URL;
+  const PHOTO_URL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
   const formatPath = (path: string) => {
     if (!path) return "/assets/placeholder-photo.png";

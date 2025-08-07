@@ -346,7 +346,7 @@ function DataPage() {
 
     try {
       const response = await axios.get(
-        `https://api.inspeksimobil.id/pdf-stuff/inspections/${id}/changelog`,
+        `${process.env.NEXT_PUBLIC_PDF_URL}/${process.env.NEXT_PUBLIC_CODE}/inspections/${id}/changelog`,
         {
           headers: {
             "Content-Type": "application/json",
