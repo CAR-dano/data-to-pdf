@@ -61,9 +61,11 @@ function DataPage() {
   const [dataHalamanPerluPerhatianPhotos, setDataHalamanPerluPerhatianPhotos] =
     useState<any[]>([]);
   const [rawInspectionData, setRawInspectionData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = React.useState(true);
 
   const getData = async (id: string) => {
+    setIsLoading(true);
     try {
       const response = await axios.get(
         `${process.env.NEXT_PUBLIC_PDF_URL}/${process.env.NEXT_PUBLIC_CODE}/inspections/${id}/no-docs`,
@@ -76,12 +78,14 @@ function DataPage() {
       if (response.data) {
         setRawInspectionData(response.data); // Store the raw data
         preProcessData(response.data);
-        getChangeData(id); // Call getChangeData after initial data is processed
+        await getChangeData(id); // Call getChangeData after initial data is processed
       } else {
         console.error("Failed to fetch data: No data in response");
+        setIsLoading(false);
       }
     } catch (error) {
       console.error("Failed to fetch data:", error);
+      setIsLoading(false);
     }
   };
 
@@ -342,7 +346,10 @@ function DataPage() {
   };
 
   const getChangeData = async (id: string) => {
-    if (!id || id === "review") return;
+    if (!id || id === "review") {
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const response = await axios.get(
@@ -360,6 +367,7 @@ function DataPage() {
       console.error("Failed to fetch edited data:", error);
     } finally {
       setStatus(false);
+      setIsLoading(false);
     }
   };
 
@@ -598,13 +606,22 @@ function DataPage() {
 
   return (
     <>
-      <div className="sheet-outer A4">
-        {page.map((item, index) => (
-          <div key={index} className="sheet padding-5mm">
-            {item.component}
+      {isLoading ? (
+        <div className="flex justify-center items-center min-h-screen">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500 mx-auto mb-4"></div>
+            <p className="text-lg text-gray-600">Loading inspection data...</p>
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className="sheet-outer A4">
+          {page.map((item, index) => (
+            <div key={index} className="sheet padding-5mm">
+              {item.component}
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 }
