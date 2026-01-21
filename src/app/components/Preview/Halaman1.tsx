@@ -2,7 +2,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Image from "next/image";
 
 interface Halaman1Props {
   data: any;
@@ -259,6 +258,15 @@ const Halaman1: React.FC<Halaman1Props> = ({
     return gradingScale[score] ?? "Skor tidak valid";
   }
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = event.currentTarget;
+    if (target.dataset.fallbackApplied === "true") {
+      return;
+    }
+    target.dataset.fallbackApplied = "true";
+    target.src = "/assets/placeholder-photo.png";
+  };
+
   return (
     <div className="px-[30px] font-poppins">
       <Header />
@@ -452,12 +460,13 @@ const Halaman1: React.FC<Halaman1Props> = ({
 
         <div className="w-full flex border-t-2 border-black">
           <div className="w-1/2 bg-[#B2BEB5] border-r-2 border-black h-48">
-            <Image
+            <img
               src={`${PHOTO_URL}/uploads/inspection-photos/${data.photos}`}
               alt="Tampak Depan"
-              width={200}
-              height={200}
               className="mx-auto w-[90%] h-full object-cover"
+              loading="lazy"
+              decoding="async"
+              onError={handleImageError}
             />
           </div>
           <div

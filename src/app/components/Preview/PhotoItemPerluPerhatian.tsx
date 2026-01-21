@@ -43,6 +43,15 @@ const PhotoItemPerluPerhatian: React.FC<PhotoItemPerluPerhatianProps> = ({
     onPhotoUpdate?.(item.id, data);
   };
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = event.currentTarget;
+    if (target.dataset.fallbackApplied === "true") {
+      return;
+    }
+    target.dataset.fallbackApplied = "true";
+    target.src = "/assets/placeholder-photo.png";
+  };
+
   return (
     <>
       <div
@@ -87,7 +96,10 @@ const PhotoItemPerluPerhatian: React.FC<PhotoItemPerluPerhatianProps> = ({
             item.path ? formatPath(item.path) : "/assets/placeholder-photo.png"
           }
           alt={capitalizedLabel}
-          className="w-[220px] h-[150px] object-cover "
+          className="w-[220px] h-[150px] object-cover"
+          loading="lazy"
+          decoding="async"
+          onError={handleImageError}
         />
         <p className="w-[220px] h-[48px] overflow-hidden text-center font-semibold mt-2 text-base break-words">
           {capitalizedLabel}

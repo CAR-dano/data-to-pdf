@@ -28,6 +28,15 @@ const PhotoItemGeneral: React.FC<PhotoItemGeneralProps> = ({
     }
   }, [item.label]); // Recalculate when label changes
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = event.currentTarget;
+    if (target.dataset.fallbackApplied === "true") {
+      return;
+    }
+    target.dataset.fallbackApplied = "true";
+    target.src = "/assets/placeholder-photo.png";
+  };
+
   return (
     <div className=" flex items-center justify-center flex-col">
       <img
@@ -40,6 +49,9 @@ const PhotoItemGeneral: React.FC<PhotoItemGeneralProps> = ({
             ? "w-[500px] h-[375px] object-cover"
             : "w-full max-h-[300px] object-cover"
         }
+        loading="lazy"
+        decoding="async"
+        onError={handleImageError}
       />
       {/* <p
         ref={textRef}

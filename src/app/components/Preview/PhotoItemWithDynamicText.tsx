@@ -19,6 +19,15 @@ const PhotoItemWithDynamicText: React.FC<PhotoItemWithDynamicTextProps> = ({
 
   const capitalizedLabel = capitalizeWords(item.label);
 
+  const handleImageError = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    const target = event.currentTarget;
+    if (target.dataset.fallbackApplied === "true") {
+      return;
+    }
+    target.dataset.fallbackApplied = "true";
+    target.src = "/assets/placeholder-photo.png";
+  };
+
   return (
     <div className="text-black flex items-center justify-center flex-col h-[206px]">
       <img
@@ -26,7 +35,10 @@ const PhotoItemWithDynamicText: React.FC<PhotoItemWithDynamicTextProps> = ({
           item.path ? formatPath(item.path) : "/assets/placeholder-photo.png"
         }
         alt={capitalizedLabel}
-        className="w-[220px] h-[165px] object-cover "
+        className="w-[220px] h-[165px] object-cover"
+        loading="lazy"
+        decoding="async"
+        onError={handleImageError}
       />
     </div>
   );
